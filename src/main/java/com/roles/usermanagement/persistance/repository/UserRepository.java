@@ -1,5 +1,6 @@
 package com.roles.usermanagement.persistance.repository;
 
+import com.roles.usermanagement.domain.repository.IUserRepository;
 import com.roles.usermanagement.persistance.crud.UserCrudRepository;
 import com.roles.usermanagement.persistance.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * Utiliza la interfaz UserCrudRepository para operaciones CRUD básicas.
  */
 @Repository
-public class UserRepository {
+public class UserRepository implements IUserRepository {
 
   private final UserCrudRepository userCrudRepository;
 
@@ -25,6 +26,7 @@ public class UserRepository {
    * @param username El nombre de usuario del usuario que se busca.
    * @return La entidad UserEntity correspondiente al nombre de usuario proporcionado.
    */
+  @Override
   public UserEntity loadUserByUsername(String username) {
     return userCrudRepository.findById(username).orElse(null);
   }

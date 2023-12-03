@@ -1,5 +1,6 @@
 package com.roles.usermanagement.persistance.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,13 +27,14 @@ public class UserRoleEntity {
   private String username;
 
   @Id
-  @Column(nullable = false, length = 50, unique = true)
+  @Column(nullable = false, length = 50)
   private String role;
 
-  @Column(nullable = false, length = 200, unique = true, columnDefinition = "DATETIME", name = "granted_date")
+  @Column(nullable = false, length = 200,  columnDefinition = "DATETIME", name = "granted_date")
   private LocalDateTime grantedDate;
 
   @ManyToOne
   @JoinColumn(name = "username", insertable = false, updatable = false)
+  @JsonIgnore
   private UserEntity user;
 }

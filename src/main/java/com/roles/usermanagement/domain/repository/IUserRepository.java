@@ -1,5 +1,6 @@
 package com.roles.usermanagement.domain.repository;
 
+import com.roles.usermanagement.domain.dto.UserDto;
 import com.roles.usermanagement.persistance.entity.UserEntity;
 
 /**
@@ -13,5 +14,5 @@ public interface IUserRepository {
    * @param username El nombre de usuario del usuario que se busca.
    * @return La entidad UserEntity correspondiente al nombre de usuario proporcionado.
    */
-  UserEntity loadUserByUsername(String username);
+  UserDto loadUserByUsername(String username);
 }

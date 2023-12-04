@@ -1,8 +1,10 @@
 package com.roles.usermanagement.persistance.repository;
 
+import com.roles.usermanagement.domain.dto.UserDto;
 import com.roles.usermanagement.domain.repository.IUserRepository;
 import com.roles.usermanagement.persistance.crud.UserCrudRepository;
 import com.roles.usermanagement.persistance.entity.UserEntity;
+import com.roles.usermanagement.persistance.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,10 +16,12 @@ import org.springframework.stereotype.Repository;
 public class UserRepository implements IUserRepository {
 
   private final UserCrudRepository userCrudRepository;
+  private final UserMapper userMapper;
 
   @Autowired
-  public UserRepository(UserCrudRepository userCrudRepository) {
+  public UserRepository(UserCrudRepository userCrudRepository, UserMapper userMapper) {
     this.userCrudRepository = userCrudRepository;
+    this.userMapper = userMapper;
   }
 
   /**
@@ -27,7 +31,8 @@ public class UserRepository implements IUserRepository {
    * @return La entidad UserEntity correspondiente al nombre de usuario proporcionado.
    */
   @Override
-  public UserEntity loadUserByUsername(String username) {
-    return userCrudRepository.findById(username).orElse(null);
+  public UserDto loadUserByUsername(String username) {
+    UserEntity userEntity = userCrudRepository.findById(username).orElse(null);
+    return userMapper.toUserDto(userEntity);
   }
 }

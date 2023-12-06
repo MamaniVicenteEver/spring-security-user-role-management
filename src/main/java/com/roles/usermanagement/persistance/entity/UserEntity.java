@@ -1,5 +1,6 @@
 package com.roles.usermanagement.persistance.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,6 +36,6 @@ public class UserEntity {
   @Column(nullable = false, length = 200)
   private String password;
 
-  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   private List<UserRoleEntity> roles;
 }

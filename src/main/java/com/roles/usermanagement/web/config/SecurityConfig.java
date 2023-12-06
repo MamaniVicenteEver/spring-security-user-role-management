@@ -43,14 +43,15 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(customRequest -> customRequest
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/customers/**").hasAnyRole(UserRoles.Role.ADMIN.name(), UserRoles.Role.CUSTOMER.name())
+                .requestMatchers("/api/user/**").hasRole(UserRoles.Role.ADMIN.name())
+                /*.requestMatchers("/api/customers/**").hasAnyRole(UserRoles.Role.ADMIN.name(), UserRoles.Role.CUSTOMER.name())
                 .requestMatchers(HttpMethod.GET, "/api/pizzas/**").hasAnyRole(UserRoles.Role.ADMIN.name(), UserRoles.Role.CUSTOMER.name())
                 .requestMatchers(HttpMethod.POST, "/api/pizzas/**").hasRole(UserRoles.Role.ADMIN.name())
                 .requestMatchers(HttpMethod.PUT).hasRole(UserRoles.Role.ADMIN.name())
                 .requestMatchers("/api/orders/random").hasAuthority(UserRoles.Authority.RANDOM_ORDER.name())
                 .requestMatchers("/api/orders/**").hasRole(UserRoles.Role.ADMIN.name())
                 .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
-                .requestMatchers(HttpMethod.PUT).denyAll()
+                .requestMatchers(HttpMethod.PUT).denyAll()*/
                 .anyRequest().authenticated())
             .csrf(AbstractHttpConfigurer::disable)
             .cors(Customizer.withDefaults())

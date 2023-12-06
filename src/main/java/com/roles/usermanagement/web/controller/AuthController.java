@@ -2,9 +2,9 @@ package com.roles.usermanagement.web.controller;
 
 
 import com.roles.usermanagement.domain.dto.LoginDto;
+import com.roles.usermanagement.domain.dto.TokenResponseDto;
 import com.roles.usermanagement.web.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,15 +36,12 @@ public class AuthController {
      * @return Respuesta con el token JWT en el encabezado de autorización si la autenticación es exitosa.
      */
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginDto loginDto) {
-        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
-        Authentication authentication = this.authenticationManager.authenticate(login);
-
-        System.out.println(authentication.isAuthenticated());
-        System.out.println(authentication.getPrincipal());
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+       // UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+       // Authentication authentication = this.authenticationManager.authenticate(login);
 
         String jwt = this.jwtUtil.create(loginDto.getUsername());
 
-        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, jwt).build();
+        return ResponseEntity.ok(jwt);//.header(HttpHeaders.AUTHORIZATION, jwt).build();
     }
 }

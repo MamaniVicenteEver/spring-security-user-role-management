@@ -1,5 +1,6 @@
 package com.roles.usermanagement.persistance.entity;
 
+import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;

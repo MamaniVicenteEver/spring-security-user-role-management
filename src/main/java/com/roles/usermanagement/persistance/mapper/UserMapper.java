@@ -1,7 +1,10 @@
 package com.roles.usermanagement.persistance.mapper;
 
 import com.roles.usermanagement.domain.dto.UserDto;
+import com.roles.usermanagement.domain.dto.UserRoleDto;
 import com.roles.usermanagement.persistance.entity.UserEntity;
+import com.roles.usermanagement.persistance.entity.UserRoleEntity;
+import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
@@ -19,7 +22,8 @@ public interface UserMapper {
   })
   UserDto toUserDto(UserEntity userEntity);
 
-  @InheritInverseConfiguration
+  List<UserDto> toUsersDto(List<UserEntity> userEntities);
 
+  @InheritInverseConfiguration
   UserEntity toUserEntity(UserDto userDto);
 }
